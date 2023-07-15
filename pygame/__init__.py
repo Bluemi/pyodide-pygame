@@ -1,3 +1,7 @@
+from . import display
+from . import draw
+
+
 class Color:
     def __init__(self, r, g, b, a=255):
         self.r = r
@@ -9,5 +13,10 @@ class Color:
 def init():
     pass
 
+
 def quit():
     pass
+
+
+init()
+

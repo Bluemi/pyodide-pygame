@@ -1,11 +1,10 @@
 [tool.poetry]
-name = "pyodide-pygame"
+name = "pygame"
 version = "0.1.0"
 description = "Some pygame functionality written for pyodide to use pygame over pyodide in the browser."
 authors = ["Bluemi <bruno.schilling@protonmail.ch>"]
 license = "GPL-3.0-or-later"
 readme = "README.md"
-packages = [{include = "pyodide_pygame"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
