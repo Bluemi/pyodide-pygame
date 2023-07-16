@@ -3,18 +3,6 @@
 Features to implement:
 
 ```
-pg.mouse.get_pos()
-pg.event.Event:
-  pg.MOUSEMOTION
-  pg.QUIT
-  pg.MOUSEBUTTONDOWN
-  pg.MOUSEBUTTONUP
-  pg.WINDOWENTER
-  pg.WINDOWFOCUSGAINED
-  pg.KEYUP
-  pg.KEYDOWN
-  pg.WINDOWRESIZED
-  pg.MOUSEWHEEL
 pg.draw:
   rect
   circle

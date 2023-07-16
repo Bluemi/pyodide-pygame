@@ -49,14 +49,30 @@ async function createPygameHelper(pyodide, micropip, canvas) {
     pyodide.runPython("import pygame");
 
     // handle events
-    canvas.addEventListener('click', function(evt) {
+    canvas.addEventListener('mousedown', function(evt) {
         let mousePos = getCanvasMousePos(canvas, evt);
         let locals = new Map();
         locals.set('mouse_position', pyodide.toPy(mousePos));
+        locals.set('button', evt.button);
         pyodide.runPython(
-            "pygame.event.handle_event(pygame.event.Event.create_click(mouse_position))",
+            "pygame.event.handle_event(pygame.event.Event.create_mousebuttondown(mouse_position, button))",
             {locals: locals}
         );
+    });
+
+    canvas.addEventListener('mouseup', function(evt) {
+        let mousePos = getCanvasMousePos(canvas, evt);
+        let locals = new Map();
+        locals.set('mouse_position', pyodide.toPy(mousePos));
+        locals.set('button', evt.button);
+        pyodide.runPython(
+            "pygame.event.handle_event(pygame.event.Event.create_mousebuttonup(mouse_position, button))",
+            {locals: locals}
+        );
+    });
+
+    canvas.addEventListener('mouseenter', function(_evt) {
+        pyodide.runPython("pygame.event.handle_event(pygame.event.Event.create_mouseenter())");
     });
 
     canvas.addEventListener('mousemove', function(evt) {
@@ -67,6 +83,42 @@ async function createPygameHelper(pyodide, micropip, canvas) {
             "pygame.event.handle_event(pygame.event.Event.create_mousemotion(mouse_position))",
             {locals: locals}
         );
-    }, false);
+    });
 
+    canvas.addEventListener('wheel', function(evt) {
+        let locals = new Map();
+        locals.set('wheelDelta', evt.wheelDelta / 120.0);
+        pyodide.runPython(
+            "pygame.event.handle_event(pygame.event.Event.create_mousemotion(wheelDelta))",
+            {locals: locals}
+        );
+    });
+
+    window.addEventListener('keydown', function(evt) {
+        let locals = new Map();
+        locals.set('key', evt.keyCode);
+        locals.set('unicode', evt.key);
+        pyodide.runPython(
+            "pygame.event.handle_event(pygame.event.Event.create_keydown(key, unicode))",
+            {locals: locals}
+        );
+    });
+
+    window.addEventListener('keyup', function(evt) {
+        let locals = new Map();
+        locals.set('key', evt.keyCode);
+        locals.set('unicode', evt.key);
+        pyodide.runPython(
+            "pygame.event.handle_event(pygame.event.Event.create_keyup(key, unicode))",
+            {locals: locals}
+        );
+    });
+
+    canvas.addEventListener('resize', function(_evt) {
+        pyodide.runPython("pygame.event.handle_event(pygame.event.Event.create_windowresized())");
+    });
+
+    canvas.addEventListener('focus', function(_evt) {
+        pyodide.runPython("pygame.event.handle_event(pygame.event.Event.create_focus())");
+    });
 }
