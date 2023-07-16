@@ -25,3 +25,5 @@ class Event:
 
 
 MOUSEBUTTONDOWN = 0
+QUIT = 1
+KEYDOWN = 2
