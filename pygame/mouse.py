@@ -1,2 +1,5 @@
+mouse_position = (0, 0)
+
+
 def get_pos():
-    raise NotImplementedError('MousePosition depends on event handling')
+    return mouse_position
