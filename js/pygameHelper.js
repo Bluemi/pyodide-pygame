@@ -44,4 +44,12 @@ async function createPygameHelper(pyodide, micropip, canvas) {
         }
     };
     pyodide.registerJsModule("pygame_helper", pygameHelper);
+
+    // handle events
+    canvas.addEventListener('click', function(_evt) {
+        pyodide.runPython(`
+            import pygame
+            pygame.event.handle_event(pygame.event.Event.create_click())
+        `)
+    });
 }
