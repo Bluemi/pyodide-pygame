@@ -20,8 +20,6 @@ def quit():
     pass
 
 
-init()
-
 # event types
 MOUSEBUTTONDOWN = event.MOUSEBUTTONDOWN
 QUIT = event.QUIT
