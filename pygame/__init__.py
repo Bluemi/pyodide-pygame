@@ -1,5 +1,6 @@
 from . import display
 from . import draw
+from . import event
 
 
 class Color:
@@ -20,3 +21,5 @@ def quit():
 
 init()
 
+# event types
+MOUSEBUTTONDOWN = event.MOUSEBUTTONDOWN
