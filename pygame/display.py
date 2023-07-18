@@ -5,6 +5,9 @@ from .rect import Rect
 from .draw import rect, _DrawInstruction
 
 
+window_size = (0, 0)
+
+
 class Screen:
     def __init__(self, canvas):
         self.canvas = canvas
@@ -40,9 +43,14 @@ class Screen:
 
 
 def set_mode(screen_size):
+    global window_size
+    window_size = screen_size
     return Screen(pygame_helper.display.set_mode(to_js(screen_size)))
 
 
 def flip():
     pass
 
+
+def get_window_size():
+    return window_size
