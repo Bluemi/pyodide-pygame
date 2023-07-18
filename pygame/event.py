@@ -18,13 +18,14 @@ def handle_event(evt):
 
 
 class Event:
-    def __init__(self, evt_type, pos=None, y=None, key=None, unicode=None, button=None):
+    def __init__(self, evt_type, pos=None, y=None, key=None, unicode=None, button=None, rel=None):
         self.type = evt_type
         self.pos = pos
         self.y = y
         self.key = key
         self.unicode = unicode
         self.button = button
+        self.rel = rel
 
     @staticmethod
     def create_mousebuttondown(pos, button):
@@ -39,8 +40,8 @@ class Event:
         return Event(MOUSEENTER)
 
     @staticmethod
-    def create_mousemotion(pos):
-        return Event(MOUSEMOTION, pos=pos)
+    def create_mousemotion(pos, rel):
+        return Event(MOUSEMOTION, pos=pos, rel=rel)
 
     @staticmethod
     def create_mousewheel(y):

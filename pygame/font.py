@@ -10,7 +10,7 @@ class _RenderedFont:
         return 'RenderFont'
 
     def get_width(self):
-        return self.font.fontsize * len(self.text) / 2
+        return self.font.fontsize * len(self.text) * 0.6
 
     def get_height(self):
         return self.font.fontsize

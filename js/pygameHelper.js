@@ -111,8 +111,10 @@ async function createPygameHelper(pyodide, micropip, canvas) {
         let mousePos = getCanvasMousePos(canvas, evt);
         let locals = new Map();
         locals.set('mouse_position', pyodide.toPy(mousePos));
+        locals.set('relX', evt.movementX);
+        locals.set('relY', evt.movementY);
         pyodide.runPython(
-            "pygame.event.handle_event(pygame.event.Event.create_mousemotion(mouse_position))",
+            "pygame.event.handle_event(pygame.event.Event.create_mousemotion(mouse_position, (relX, relY)))",
             {locals: locals}
         );
     });
