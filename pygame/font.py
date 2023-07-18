@@ -6,6 +6,9 @@ class _RenderedFont:
         self.color = color
         self.background = background
 
+    def get_surface_type(self):
+        return 'RenderFont'
+
 
 class Font:
     def __init__(self, fontname, fontsize):

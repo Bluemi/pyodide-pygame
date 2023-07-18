@@ -49,11 +49,18 @@ async function createPygameHelper(pyodide, micropip, canvas) {
                 ctx.fill();
                 ctx.fillStyle = '#000000';
             },
-            rect: function (canvas, color, rect_pos) {
+            rect: function (canvas, color, rectPos, borderRadius) {
+                if (!Number.isInteger(borderRadius)) {
+                    borderRadius = 0;
+                }
                 const ctx = canvas.getContext("2d");
                 ctx.beginPath();
                 ctx.fillStyle = rgbToHex(color);
-                ctx.rect(rect_pos[0], rect_pos[1], rect_pos[2], rect_pos[3]);
+                if (borderRadius === 0) {
+                    ctx.rect(rectPos[0], rectPos[1], rectPos[2], rectPos[3]);
+                } else {
+                    ctx.roundRect(rectPos[0], rectPos[1], rectPos[2], rectPos[3], borderRadius);
+                }
                 ctx.fill();
                 ctx.fillStyle = '#000000';
             },
