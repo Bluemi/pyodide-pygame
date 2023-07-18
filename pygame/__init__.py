@@ -38,6 +38,9 @@ class Surface:
     def get_surface_type(self):
         return 'Surface'
 
+    def set_alpha(self, _alpha):
+        print('setting alpha for Surface is not supported')
+
 
 def init():
     pass
@@ -57,5 +60,6 @@ KEYDOWN = event.KEYDOWN
 KEYUP = event.KEYUP
 WINDOWRESIZED = event.WINDOWRESIZED
 WINDOWENTER = event.WINDOWENTER
+WINDOWFOCUSGAINED = event.WINDOWFOCUSGAINED
 FOCUS = event.FOCUS
 QUIT = event.QUIT
