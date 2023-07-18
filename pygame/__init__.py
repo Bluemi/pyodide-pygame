@@ -42,7 +42,8 @@ class Surface:
         return 'Surface'
 
     def set_alpha(self, _alpha):
-        print('setting alpha for Surface is not supported')
+        # print('setting alpha for Surface is not supported')
+        pass
 
 
 def init():

@@ -127,7 +127,7 @@ async function createPygameHelper(pyodide, micropip, canvas) {
         let locals = new Map();
         locals.set('wheelDelta', evt.wheelDelta / 120.0);
         pyodide.runPython(
-            "pygame.event.handle_event(pygame.event.Event.create_mousemotion(wheelDelta))",
+            "pygame.event.handle_event(pygame.event.Event.create_mousewheel(wheelDelta))",
             {locals: locals}
         );
     });
