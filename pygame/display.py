@@ -48,6 +48,9 @@ class Screen:
     def get_height(self):
         return self.size[1]
 
+    def get_rect(self):
+        return Rect(0, 0, self.size[0], self.size[1])
+
 
 def set_mode(screen_size):
     global window_size

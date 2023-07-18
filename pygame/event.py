@@ -89,8 +89,9 @@ MOUSEWHEEL = 4
 KEYDOWN = 5
 KEYUP = 6
 WINDOWRESIZED = 7
-FOCUS = 8
-QUIT = 9
+WINDOWENTER = 8
+FOCUS = 9
+QUIT = 10
 
 
 def _type_to_str(t):
