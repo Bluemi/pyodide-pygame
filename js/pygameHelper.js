@@ -40,6 +40,26 @@ async function createPygameHelper(pyodide, micropip, canvas) {
                 ctx.lineTo(dest[0], dest[1]);
                 ctx.stroke();
                 ctx.strokeStyle = '#000000';
+            },
+            circle: function (canvas, color, center, radius) {
+                const ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                ctx.strokeStyle = rgbToHex(color);
+                ctx.fillStyle = ctx.strokeStyle;
+                ctx.arc(center[0], center[1], radius, 0, 2*Math.PI);
+                ctx.fill();
+                ctx.fillStyle = '#000000';
+                ctx.strokeStyle = '#000000';
+            },
+            rect: function (canvas, color, rect_pos) {
+                const ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                ctx.strokeStyle = rgbToHex(color);
+                ctx.fillStyle = ctx.strokeStyle;
+                ctx.rect(rect_pos[0], rect_pos[1], rect_pos[2], rect_pos[3]);
+                ctx.fill();
+                ctx.fillStyle = '#000000';
+                ctx.strokeStyle = '#000000';
             }
         },
     };
@@ -53,7 +73,7 @@ async function createPygameHelper(pyodide, micropip, canvas) {
         let mousePos = getCanvasMousePos(canvas, evt);
         let locals = new Map();
         locals.set('mouse_position', pyodide.toPy(mousePos));
-        locals.set('button', evt.button);
+        locals.set('button', evt.button + 1); // pygame button is one higher than js button
         pyodide.runPython(
             "pygame.event.handle_event(pygame.event.Event.create_mousebuttondown(mouse_position, button))",
             {locals: locals}
@@ -64,7 +84,7 @@ async function createPygameHelper(pyodide, micropip, canvas) {
         let mousePos = getCanvasMousePos(canvas, evt);
         let locals = new Map();
         locals.set('mouse_position', pyodide.toPy(mousePos));
-        locals.set('button', evt.button);
+        locals.set('button', evt.button + 1); // pygame button is one higher than js button
         pyodide.runPython(
             "pygame.event.handle_event(pygame.event.Event.create_mousebuttonup(mouse_position, button))",
             {locals: locals}

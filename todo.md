@@ -3,9 +3,6 @@
 Features to implement:
 
 ```
-pg.draw:
-  rect
-  circle
 pg.font:
   get_default_font()
   Font()
