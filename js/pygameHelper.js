@@ -44,22 +44,28 @@ async function createPygameHelper(pyodide, micropip, canvas) {
             circle: function (canvas, color, center, radius) {
                 const ctx = canvas.getContext("2d");
                 ctx.beginPath();
-                ctx.strokeStyle = rgbToHex(color);
-                ctx.fillStyle = ctx.strokeStyle;
+                ctx.fillStyle = rgbToHex(color);
                 ctx.arc(center[0], center[1], radius, 0, 2*Math.PI);
                 ctx.fill();
                 ctx.fillStyle = '#000000';
-                ctx.strokeStyle = '#000000';
             },
             rect: function (canvas, color, rect_pos) {
                 const ctx = canvas.getContext("2d");
                 ctx.beginPath();
-                ctx.strokeStyle = rgbToHex(color);
-                ctx.fillStyle = ctx.strokeStyle;
+                ctx.fillStyle = rgbToHex(color);
                 ctx.rect(rect_pos[0], rect_pos[1], rect_pos[2], rect_pos[3]);
                 ctx.fill();
                 ctx.fillStyle = '#000000';
-                ctx.strokeStyle = '#000000';
+            },
+            font: function (canvas, color, pos, fontstyle, text) {
+                const ctx = canvas.getContext("2d");
+                // ctx.font = fontstyle;
+                console.log("fontstyle:", fontstyle);
+                ctx.font = fontstyle;
+                ctx.textBaseline = "top";
+                ctx.fillStyle = rgbToHex(color);
+                ctx.fillText(text, pos[0], pos[1]);
+                ctx.fillStyle = '#000000';
             }
         },
     };
