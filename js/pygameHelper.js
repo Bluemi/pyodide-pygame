@@ -154,6 +154,7 @@ async function createPygameHelper(pyodide, micropip, canvas) {
     });
 
     window.addEventListener('keydown', function(evt) {
+        evt.preventDefault();
         let locals = new Map();
         let norm_evt = normalizeKeyEvent(evt);
         locals.set('key', norm_evt.keyCode);
