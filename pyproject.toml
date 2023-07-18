@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pygame"
-version = "0.1.0"
+version = "2.5.0"
 description = "Some pygame functionality written for pyodide to use pygame over pyodide in the browser."
 authors = ["Bluemi <bruno.schilling@protonmail.ch>"]
 license = "GPL-3.0-or-later"

@@ -14,7 +14,7 @@ function getCanvasMousePos(canvas, evt) {
 
 async function createPygameHelper(pyodide, micropip, canvas) {
     // install pyodide-pygame dropin
-    await micropip.install("wheels/pygame-0.1.0-py3-none-any.whl")
+    await micropip.install("wheels/pygame-2.5.0-py3-none-any.whl");
     const pygameHelper = {
         display: {
             set_mode: function (screen_size) {

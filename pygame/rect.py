@@ -43,6 +43,9 @@ class Rect:
             self.height,
         )
 
+    def copy(self):
+        return Rect(self.left, self.top, self.width, self.height)
+
     def collidepoint(self, point):
         return self.left < point[0] < self.right and self.top < point[1] < self.bottom
 
