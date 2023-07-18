@@ -9,6 +9,12 @@ class _RenderedFont:
     def get_surface_type(self):
         return 'RenderFont'
 
+    def get_width(self):
+        return self.font.fontsize * len(self.text) / 2
+
+    def get_height(self):
+        return self.font.fontsize
+
 
 class Font:
     def __init__(self, fontname, fontsize):
