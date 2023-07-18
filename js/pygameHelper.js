@@ -144,6 +144,7 @@ async function createPygameHelper(pyodide, micropip, canvas) {
     });
 
     canvas.addEventListener('wheel', function(evt) {
+        evt.preventDefault();
         let locals = new Map();
         locals.set('wheelDelta', evt.wheelDelta / 120.0);
         pyodide.runPython(
