@@ -12,7 +12,6 @@ class Screen:
 
     def blit(self, render_object, position):
         if isinstance(render_object, _RenderedFont):
-            # font_style = "{}px {}".format(render_object.font.fontsize, render_object.font.fontname)
             font_style = "{}px serif".format(render_object.font.fontsize)
             pygame_helper.draw.font(
                 self.canvas,

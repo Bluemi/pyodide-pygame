@@ -60,7 +60,6 @@ async function createPygameHelper(pyodide, micropip, canvas) {
             font: function (canvas, color, pos, fontstyle, text) {
                 const ctx = canvas.getContext("2d");
                 // ctx.font = fontstyle;
-                console.log("fontstyle:", fontstyle);
                 ctx.font = fontstyle;
                 ctx.textBaseline = "top";
                 ctx.fillStyle = rgbToHex(color);

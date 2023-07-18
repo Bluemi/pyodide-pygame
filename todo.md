@@ -3,10 +3,6 @@
 Features to implement:
 
 ```
-pg.font:
-  get_default_font()
-  Font()
-  render()
 pg.Surface
 pg.Rect
 pg.display
