@@ -13,6 +13,9 @@ class Color:
         self.b = b
         self.a = a
 
+    def __sub__(self, other):
+        return Color(self.r - other.r, self.g - other.g, self.b - other.b, self.a)
+
 
 class Surface:
     def __init__(self, size):

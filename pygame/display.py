@@ -51,6 +51,22 @@ class Screen:
     def get_rect(self):
         return Rect(0, 0, self.size[0], self.size[1])
 
+    def subsurface(self, subrect):
+        return SubSurface(self.canvas, subrect)
+
+
+class SubSurface:
+    def __init__(self, canvas, subrect):
+        self.canvas = canvas
+        self.subrect = subrect
+
+    def get_surface_type(self):
+        return 'SubScreen'
+
+    def subsurface(self, subrect):
+        subrect = subrect.move(self.subrect.lefttop)
+        return SubSurface(self.canvas, subrect)
+
 
 def set_mode(screen_size):
     global window_size

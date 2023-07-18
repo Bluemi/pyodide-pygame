@@ -11,9 +11,15 @@ class BottomAttribute:
         return rect.top + rect.height
 
 
+class LeftTopAttribute:
+    def __get__(self, rect, obj_type=None):
+        return rect.left, rect.top
+
+
 class Rect:
     right = RightAttribute()
     bottom = BottomAttribute()
+    lefttop = LeftTopAttribute()
 
     def __init__(self, left, top=None, width=None, height=None):
         if (width is None) != (height is None):
