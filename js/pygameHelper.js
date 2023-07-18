@@ -1,3 +1,5 @@
+const ALLOWED_KEYCODES = [190, 188];
+
 function componentToHex(c) {
     let hex = c.toString(16);
     return hex.length === 1 ? "0" + hex : hex;
@@ -13,7 +15,24 @@ function getCanvasMousePos(canvas, evt) {
 }
 
 function isCharacterKeyPress(event) {
-    return String.fromCharCode(event.keyCode).match(/(\w|\s)/g);
+    return String.fromCharCode(event.keyCode).match(/(\w|\s)/g) || ALLOWED_KEYCODES.includes(event.keyCode);
+}
+
+function normalizeKeyEvent(event) {
+    let normalized_event = {
+        keyCode: event.keyCode,
+        unicode: event.key
+    }
+    if (!isCharacterKeyPress(event)) {
+        normalized_event.unicode = '';
+    }
+    if (event.keyCode >= 65 && event.keyCode < 90 && !event.shiftKey) {
+        normalized_event.keyCode = event.keyCode + 97 - 65;
+    }
+    if (event.keyCode === 46) {
+        normalized_event.keyCode = 127;
+    }
+    return normalized_event;
 }
 
 async function createPygameHelper(pyodide, micropip, canvas) {
@@ -134,12 +153,10 @@ async function createPygameHelper(pyodide, micropip, canvas) {
 
     window.addEventListener('keydown', function(evt) {
         let locals = new Map();
-        locals.set('key', evt.keyCode);
-        if (isCharacterKeyPress(evt)) {
-            locals.set('unicode', evt.key);
-        } else {
-            locals.set('unicode', '');
-        }
+        let norm_evt = normalizeKeyEvent(evt);
+        locals.set('key', norm_evt.keyCode);
+        locals.set('unicode', norm_evt.unicode);
+        console.log('norm evt:', norm_evt);
         pyodide.runPython(
             "pygame.event.handle_event(pygame.event.Event.create_keydown(key, unicode))",
             {locals: locals}
@@ -148,12 +165,9 @@ async function createPygameHelper(pyodide, micropip, canvas) {
 
     window.addEventListener('keyup', function(evt) {
         let locals = new Map();
-        locals.set('key', evt.keyCode);
-        if (isCharacterKeyPress(evt)) {
-            locals.set('unicode', evt.key);
-        } else {
-            locals.set('unicode', '');
-        }
+        let norm_evt = normalizeKeyEvent(evt);
+        locals.set('key', norm_evt.keyCode);
+        locals.set('unicode', norm_evt.key);
         pyodide.runPython(
             "pygame.event.handle_event(pygame.event.Event.create_keyup(key, unicode))",
             {locals: locals}
