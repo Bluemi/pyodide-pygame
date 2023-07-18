@@ -12,6 +12,10 @@ function getCanvasMousePos(canvas, evt) {
     return [Math.floor(evt.clientX - rect.left), Math.floor(evt.clientY - rect.top)];
 }
 
+function isCharacterKeyPress(event) {
+    return String.fromCharCode(event.keyCode).match(/(\w|\s)/g);
+}
+
 async function createPygameHelper(pyodide, micropip, canvas) {
     // install pyodide-pygame dropin
     await micropip.install("wheels/pygame-2.5.0-py3-none-any.whl");
@@ -131,7 +135,11 @@ async function createPygameHelper(pyodide, micropip, canvas) {
     window.addEventListener('keydown', function(evt) {
         let locals = new Map();
         locals.set('key', evt.keyCode);
-        locals.set('unicode', evt.key);
+        if (isCharacterKeyPress(evt)) {
+            locals.set('unicode', evt.key);
+        } else {
+            locals.set('unicode', '');
+        }
         pyodide.runPython(
             "pygame.event.handle_event(pygame.event.Event.create_keydown(key, unicode))",
             {locals: locals}
@@ -141,7 +149,11 @@ async function createPygameHelper(pyodide, micropip, canvas) {
     window.addEventListener('keyup', function(evt) {
         let locals = new Map();
         locals.set('key', evt.keyCode);
-        locals.set('unicode', evt.key);
+        if (isCharacterKeyPress(evt)) {
+            locals.set('unicode', evt.key);
+        } else {
+            locals.set('unicode', '');
+        }
         pyodide.runPython(
             "pygame.event.handle_event(pygame.event.Event.create_keyup(key, unicode))",
             {locals: locals}

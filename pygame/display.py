@@ -11,6 +11,10 @@ window_size = (0, 0)
 def _do_blit(surface, render_object, position):
     if render_object.get_surface_type() == 'RenderFont':
         font_style = "{}px sans-serif".format(render_object.font.fontsize)
+
+        if not isinstance(position, tuple):
+            position = tuple(int(i) for i in position[:2])
+
         pygame_helper.draw.font(
             surface.canvas,
             to_js(render_object.color),
@@ -85,7 +89,7 @@ class SubSurface:
 def set_mode(screen_size):
     global window_size
     window_size = tuple(int(s) for s in screen_size)
-    return Screen(pygame_helper.display.set_mode(to_js(screen_size)), screen_size)
+    return Screen(pygame_helper.display.set_mode(to_js(screen_size)), window_size)
 
 
 def flip():
