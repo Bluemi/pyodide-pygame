@@ -3,12 +3,12 @@ from pyodide.ffi import to_js
 
 class RightAttribute:
     def __get__(self, rect, obj_type=None):
-        return rect.coordinates[0] + rect.coordinates[2]
+        return rect.left + rect.width
 
 
 class BottomAttribute:
     def __get__(self, rect, obj_type=None):
-        return rect.coordinates[1] + rect.coordinates[3]
+        return rect.top + rect.height
 
 
 class Rect:
@@ -29,6 +29,9 @@ class Rect:
         self.top = top
         self.height = height
 
+    def __getitem__(self, index):
+        return (self.left, self.top, self.width, self.height)[index]
+
     def to_js(self):
         return to_js((self.left, self.top, self.width, self.height))
 
@@ -39,3 +42,13 @@ class Rect:
             self.width,
             self.height,
         )
+
+    def collidepoint(self, point):
+        return self.left < point[0] < self.right and self.top < point[1] < self.bottom
+
+    def clip(self, other):
+        left = max(self.left, other.left)
+        top = max(self.top, other.top)
+        right = min(self.right, other.right)
+        bottom = min(self.bottom, other.bottom)
+        return Rect(left, top, right-left, bottom-top)

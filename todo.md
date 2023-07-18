@@ -3,8 +3,6 @@
 Features to implement:
 
 ```
-pg.Surface
-pg.Rect
 pg.display
   get_window_size()
 screen:
