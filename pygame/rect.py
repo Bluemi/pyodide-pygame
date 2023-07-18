@@ -61,3 +61,6 @@ class Rect:
         right = min(self.right, other.right)
         bottom = min(self.bottom, other.bottom)
         return Rect(left, top, right-left, bottom-top)
+
+    def __repr__(self):
+        return 'Rect(left={} top={} width={} height={})'.format(self.left, self.top, self.width, self.height)

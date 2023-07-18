@@ -78,10 +78,13 @@ class SubSurface:
         subrect = subrect.move(self.subrect.lefttop)
         return SubSurface(self.canvas, subrect)
 
+    def __repr__(self):
+        return 'SubSurface(subrect={})'.format(self.subrect)
+
 
 def set_mode(screen_size):
     global window_size
-    window_size = screen_size
+    window_size = tuple(int(s) for s in screen_size)
     return Screen(pygame_helper.display.set_mode(to_js(screen_size)), screen_size)
 
 

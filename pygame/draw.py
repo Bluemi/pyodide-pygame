@@ -31,7 +31,6 @@ def rect(screen, color, rect_pos, border_radius=0):
         )
         screen.draw_instructions.append(instruction)
     elif screen.get_surface_type() == 'SubScreen':
-        # rect_pos = rect_pos.move(screen.subrect.lefttop)
         pygame_helper.draw.rect(screen.canvas, to_js(color), rect_pos.to_js(), border_radius)
     else:
         raise NotImplementedError('Drawing rect on {} not supported'.format(screen.get_surface_type()))
