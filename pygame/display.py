@@ -9,8 +9,9 @@ window_size = (0, 0)
 
 
 class Screen:
-    def __init__(self, canvas):
+    def __init__(self, canvas, size):
         self.canvas = canvas
+        self.size = size
 
     def fill(self, color):
         pygame_helper.display.fill(self.canvas, to_js(color))
@@ -41,11 +42,17 @@ class Screen:
     def get_surface_type(self):
         return 'Screen'
 
+    def get_width(self):
+        return self.size[0]
+
+    def get_height(self):
+        return self.size[1]
+
 
 def set_mode(screen_size):
     global window_size
     window_size = screen_size
-    return Screen(pygame_helper.display.set_mode(to_js(screen_size)))
+    return Screen(pygame_helper.display.set_mode(to_js(screen_size)), screen_size)
 
 
 def flip():
