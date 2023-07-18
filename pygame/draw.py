@@ -4,7 +4,8 @@ from pyodide.ffi import to_js
 from .rect import Rect
 
 
-def line(screen, color, start, dest):
+def line(screen, color, start, dest, width=1):
+    # TODO: width is currently not supported
     if screen.get_surface_type() == 'Screen':
         pygame_helper.draw.line(screen.canvas, to_js(color), to_js(start), to_js(list(dest)))
     else:

@@ -71,6 +71,9 @@ class SubSurface:
     def get_surface_type(self):
         return 'SubScreen'
 
+    def get_rect(self):
+        return self.subrect
+
     def subsurface(self, subrect):
         subrect = subrect.move(self.subrect.lefttop)
         return SubSurface(self.canvas, subrect)
