@@ -55,10 +55,11 @@ async function createPygameHelper(pyodide, micropip, canvas) {
             }
         },
         draw: {
-            line: function (canvas, color, start, dest) {
+            line: function (canvas, color, start, dest, width) {
                 const ctx = canvas.getContext("2d");
                 ctx.beginPath();
                 ctx.strokeStyle = rgbToHex(color);
+                ctx.lineWidth = width;
                 ctx.moveTo(start[0], start[1]);
                 ctx.lineTo(dest[0], dest[1]);
                 ctx.stroke();
