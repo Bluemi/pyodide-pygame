@@ -41,10 +41,14 @@ class Rect:
     def to_js(self):
         return to_js((self.left, self.top, self.width, self.height))
 
-    def move(self, pos):
+    def move(self, x, y=None):
+        if y is None:
+            y = x[1]
+            x = x[0]
+
         return Rect(
-            self.left + pos[0],
-            self.top + pos[1],
+            self.left + x,
+            self.top + y,
             self.width,
             self.height,
         )
