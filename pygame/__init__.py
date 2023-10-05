@@ -3,10 +3,25 @@ from . import draw
 from . import event
 from . import font
 from . import mouse
+from . import key
 from .rect import *
 
 
+
+
 class Color:
+    class ColorIterator:
+        def __init__(self, c):
+            self.color = c
+            self.position = 0
+
+        def __next__(self):
+            position = self.position
+            self.position += 1
+            if position >= 3:
+                raise StopIteration()
+            return (self.color.r, self.color.g, self.color.b)[position]
+
     def __init__(self, r, g=None, b=None, a=255):
         if (g is None) and (b is None):
             self.r, self.g, self.b = r
@@ -21,6 +36,9 @@ class Color:
 
     def __repr__(self):
         return 'Color(r={} g={} b={} a={})'.format(self.r, self.g, self.b, self.a)
+
+    def __iter__(self):
+        return Color.ColorIterator(self)
 
 
 class Surface:
@@ -70,3 +88,9 @@ WINDOWENTER = event.WINDOWENTER
 WINDOWFOCUSGAINED = event.WINDOWFOCUSGAINED
 FOCUS = event.FOCUS
 QUIT = event.QUIT
+WINDOWSHOWN = event.WINDOWSHOWN
+TEXTINPUT = event.TEXTINPUT
+
+# MOD CODES
+KMOD_SHIFT = 1
+KMOD_LSHIFT = 2

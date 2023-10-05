@@ -18,7 +18,7 @@ def handle_event(evt):
 
 
 class Event:
-    def __init__(self, evt_type, pos=None, y=None, key=None, unicode=None, button=None, rel=None):
+    def __init__(self, evt_type, pos=None, y=None, key=None, unicode=None, button=None, rel=None, text=None):
         self.type = evt_type
         self.pos = pos
         self.y = y
@@ -26,6 +26,7 @@ class Event:
         self.unicode = unicode
         self.button = button
         self.rel = rel
+        self.text = text
 
     @staticmethod
     def create_mousebuttondown(pos, button):
@@ -63,6 +64,10 @@ class Event:
     def create_focus():
         return Event(FOCUS)
 
+    @staticmethod
+    def create_text_input(text):
+        return Event(TEXTINPUT, text=text)
+
     def __repr__(self):
         rpr = ["Event(type={}".format(_type_to_str(self.type))]
         if self.pos is not None:
@@ -94,6 +99,8 @@ WINDOWENTER = 8
 WINDOWFOCUSGAINED = 8
 FOCUS = 9
 QUIT = 10
+WINDOWSHOWN = 11
+TEXTINPUT = 12
 
 
 def _type_to_str(t):
