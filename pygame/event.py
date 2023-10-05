@@ -61,6 +61,10 @@ class Event:
         return Event(WINDOWRESIZED)
 
     @staticmethod
+    def create_windowenter():
+        return Event(WINDOWENTER)
+
+    @staticmethod
     def create_focus():
         return Event(FOCUS)
 

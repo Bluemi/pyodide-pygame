@@ -24,12 +24,17 @@ class Color:
 
     def __init__(self, r, g=None, b=None, a=255):
         if (g is None) and (b is None):
-            self.r, self.g, self.b = r
+            r, g, b = r
         else:
-            self.r = r
-            self.g = g
-            self.b = b
-        self.a = a
+            r = r
+            g = g
+            b = b
+        a = a
+
+        self.r = int(r)
+        self.g = int(g)
+        self.b = int(b)
+        self.a = int(a)
 
     def __sub__(self, other):
         return Color(self.r - other.r, self.g - other.g, self.b - other.b, self.a)
