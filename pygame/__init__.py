@@ -5,8 +5,7 @@ from . import font
 from . import mouse
 from . import key
 from .rect import *
-
-
+from .constants import *
 
 
 class Color:

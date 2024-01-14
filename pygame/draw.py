@@ -6,6 +6,8 @@ from .rect import Rect
 
 def line(screen, color, start, dest, width=1):
     if screen.get_surface_type() == 'Screen':
+        start = tuple(int(n) for n in start)
+        dest = tuple(int(n) for n in dest)
         pygame_helper.draw.line(screen.canvas, to_js(color), to_js(start), to_js(list(dest)), width)
     else:
         raise NotImplementedError('Drawing line on {} not supported'.format(screen.get_surface_type()))
